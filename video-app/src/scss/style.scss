@@ -1,8 +1,9 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
 html {
   -webkit-box-sizing:border-box;
   -moz-box-sizing:border-box;
   box-sizing:border-box;
-  font-size: 62.5%;
   height: 100%;
 }
 html, body {
@@ -12,4 +13,37 @@ html, body {
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale!important;
+}
+
+.search-bar {
+  margin: 20px;
+  text-align: center;
+
+  input {
+    width: 75%;
+  }
+}
+
+.video-item {
+  img {
+    max-width: 60px;
+  }
+}
+
+.video-detail {
+
+  .details {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    
+  }
+
+}
+
+.list-group-item {
+  cursor: pointer;
+  &:hover {
+    background-color: #eee;
+  }
 }
