@@ -1,14 +1,7 @@
-## Yet another react starter kit, but this one works for me.
+## Video Search App 
 
-This will be used as my starting point when working on React + Redux projects.
+A basic video search app using a modern React flow and Youtube's search API
 
-### Things you'll need
-
-- node.js (nvm is highly recommended)
-
-- npm
-
-- yarn
 
 ### You know what to do
 
