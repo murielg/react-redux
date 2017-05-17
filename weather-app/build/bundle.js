@@ -40107,9 +40107,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _button = require('./button');
+var _search_bar = require('../containers/search_bar');
 
-var _button2 = _interopRequireDefault(_button);
+var _search_bar2 = _interopRequireDefault(_search_bar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40134,12 +40134,7 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Hello React'
-        ),
-        _react2.default.createElement(_button2.default, { title: 'Tap Me' })
+        _react2.default.createElement(_search_bar2.default, null)
       );
     }
   }]);
@@ -40149,7 +40144,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./button":223,"react":211}],223:[function(require,module,exports){
+},{"../containers/search_bar":223,"react":211}],223:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40170,32 +40165,61 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Button = function (_Component) {
-  _inherits(Button, _Component);
+var SearchBar = function (_Component) {
+  _inherits(SearchBar, _Component);
 
-  function Button() {
-    _classCallCheck(this, Button);
+  function SearchBar(props) {
+    _classCallCheck(this, SearchBar);
 
-    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+
+    _this.state = { term: '' };
+
+    _this.onInputChange = _this.onInputChange.bind(_this);
+    return _this;
   }
 
-  _createClass(Button, [{
+  _createClass(SearchBar, [{
+    key: 'onInputChange',
+    value: function onInputChange(event) {
+      this.setState({ term: event.target.value });
+    }
+  }, {
+    key: 'onFormSubmit',
+    value: function onFormSubmit(event) {
+      event.preventDefault();
+
+      //get data
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'button',
-        null,
-        this.props.title
+        'form',
+        { onSubmit: this.onFormSubmit, className: 'input-group' },
+        _react2.default.createElement('input', {
+          placeholder: 'Get a 5-day weather forecast in your favorite city',
+          className: 'form-control',
+          onChange: this.onInputChange,
+          value: this.state.term
+        }),
+        _react2.default.createElement(
+          'span',
+          { className: 'input-group-btn' },
+          _react2.default.createElement(
+            'button',
+            { type: 'submit', className: 'btn btn-secondary' },
+            'Submit'
+          )
+        )
       );
     }
   }]);
 
-  return Button;
+  return SearchBar;
 }(_react.Component);
 
-;
-
-exports.default = Button;
+exports.default = SearchBar;
 
 },{"react":211}],224:[function(require,module,exports){
 'use strict';
