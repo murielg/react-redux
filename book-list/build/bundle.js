@@ -40100,6 +40100,36 @@ function symbolObservablePonyfill(root) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.selectBook = selectBook;
+/*
+ * Google Search API
+ *
+ var books = require('google-books-search');
+
+books.search('React', function(error, results) {
+  if ( ! error ) {
+    console.log(results);
+  } else {
+    console.log(error);
+  }
+});
+
+*/
+function selectBook(book) {
+  //selectBook is an actionCreator, needs to return an action, 
+  //which is an object with a type property
+  return {
+    type: 'BOOK_SELECTED',
+    payload: book
+  };
+}
+
+},{}],223:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -40107,9 +40137,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _button = require('./button');
+var _bookList = require('../containers/book-list');
 
-var _button2 = _interopRequireDefault(_button);
+var _bookList2 = _interopRequireDefault(_bookList);
+
+var _bookDetail = require('../containers/book-detail');
+
+var _bookDetail2 = _interopRequireDefault(_bookDetail);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40134,12 +40168,8 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Hello React'
-        ),
-        _react2.default.createElement(_button2.default, { title: 'Tap Me' })
+        _react2.default.createElement(_bookList2.default, null),
+        _react2.default.createElement(_bookDetail2.default, null)
       );
     }
   }]);
@@ -40149,7 +40179,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./button":223,"react":211}],223:[function(require,module,exports){
+},{"../containers/book-detail":224,"../containers/book-list":225,"react":211}],224:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40162,6 +40192,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -40170,34 +40202,144 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Button = function (_Component) {
-  _inherits(Button, _Component);
+var BookDetail = function (_Component) {
+  _inherits(BookDetail, _Component);
 
-  function Button() {
-    _classCallCheck(this, Button);
+  function BookDetail() {
+    _classCallCheck(this, BookDetail);
 
-    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (BookDetail.__proto__ || Object.getPrototypeOf(BookDetail)).apply(this, arguments));
   }
 
-  _createClass(Button, [{
+  _createClass(BookDetail, [{
     key: 'render',
     value: function render() {
+      if (!this.props.book) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Select a Book from your shelf'
+        );
+      }
       return _react2.default.createElement(
-        'button',
+        'div',
         null,
-        this.props.title
+        _react2.default.createElement(
+          'h3',
+          null,
+          'Details for:'
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          'Title: ',
+          this.props.book.title
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          'Pages: ',
+          this.props.book.pages
+        )
       );
     }
   }]);
 
-  return Button;
+  return BookDetail;
 }(_react.Component);
 
-;
+function mapStatetoProps(state) {
+  return {
+    book: state.activeBook
+  };
+}
 
-exports.default = Button;
+exports.default = (0, _reactRedux.connect)(mapStatetoProps)(BookDetail);
 
-},{"react":211}],224:[function(require,module,exports){
+},{"react":211,"react-redux":180}],225:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _index = require('../actions/index');
+
+var _redux = require('redux');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BookList = function (_Component) {
+  _inherits(BookList, _Component);
+
+  function BookList() {
+    _classCallCheck(this, BookList);
+
+    return _possibleConstructorReturn(this, (BookList.__proto__ || Object.getPrototypeOf(BookList)).apply(this, arguments));
+  }
+
+  _createClass(BookList, [{
+    key: 'renderList',
+    value: function renderList() {
+      var _this2 = this;
+
+      return this.props.books.map(function (book) {
+        return _react2.default.createElement(
+          'li',
+          {
+            key: book.title,
+            onClick: function onClick() {
+              return _this2.props.selectBook(book);
+            },
+            className: 'list-group-item' },
+          book.title
+        );
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'ul',
+        { className: 'list-group col-sm-4' },
+        this.renderList()
+      );
+    }
+  }]);
+
+  return BookList;
+}(_react.Component);
+
+function mapStatetoProps(state) {
+  return {
+    books: state.books
+  };
+}
+
+// return from mapDispatchToProps, will end up as props to BookList container
+function mapDispatchToProps(dispatch) {
+  return (0, _redux.bindActionCreators)({ selectBook: _index.selectBook }, dispatch);
+}
+
+// Promote  BookList from component to container, needs to know about dispatch method. 
+// Make it available as a prop.
+exports.default = (0, _reactRedux.connect)(mapStatetoProps, mapDispatchToProps)(BookList);
+
+},{"../actions/index":222,"react":211,"react-redux":180,"redux":217}],226:[function(require,module,exports){
 'use strict';
 
 var _lodash = require('lodash');
@@ -40234,7 +40376,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_app2.default, null)
 ), document.querySelector('.container'));
 
-},{"./components/app":222,"./reducers":225,"lodash":36,"react":211,"react-dom":45,"react-redux":180,"redux":217}],225:[function(require,module,exports){
+},{"./components/app":223,"./reducers":227,"lodash":36,"react":211,"react-dom":45,"react-redux":180,"redux":217}],227:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40243,14 +40385,51 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = require('redux');
 
-var rootReducer = (0, _redux.combineReducers)({
-  state: function state() {
-    var _state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var _reducer_books = require('./reducer_books');
 
-    return _state;
-  }
+var _reducer_books2 = _interopRequireDefault(_reducer_books);
+
+var _reducer_active_book = require('./reducer_active_book');
+
+var _reducer_active_book2 = _interopRequireDefault(_reducer_active_book);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rootReducer = (0, _redux.combineReducers)({
+  books: _reducer_books2.default,
+  activeBook: _reducer_active_book2.default
 });
 
 exports.default = rootReducer;
 
-},{"redux":217}]},{},[224]);
+},{"./reducer_active_book":228,"./reducer_books":229,"redux":217}],228:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'BOOK_SELECTED':
+      return action.payload;
+  }
+
+  return state;
+};
+
+},{}],229:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  return [{ title: 'Eloquent Javascript', pages: 100 }, { title: 'The Goblet of Fire', pages: 500 }, { title: 'The Dark Tower', pages: 900 }, { title: 'Swift Apprentice', pages: 50 }];
+};
+
+},{}]},{},[226]);

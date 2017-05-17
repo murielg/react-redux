@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-
-import Button from './button';
+import BookList from '../containers/book-list';
+import BookDetail from '../containers/book-detail';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <h1>Hello React</h1>
-        <Button title="Tap Me" />
+        <BookList />
+        <BookDetail />
       </div>
     );
   }
