@@ -40,6 +40,24 @@ html, body {
   -moz-osx-font-smoothing: grayscale!important;
   @include solarized-light();
 }
-.table td {
-  width: 25%;
+.table {
+  td, th {
+    vertical-align: middle !important;
+    text-align: center;
+    //width: 25%;
+  }
+}
+
+.input-group {
+  margin: 25 0;
+}
+
+svg {
+  height: 150px;
+  width: auto;
+}
+
+td:first-of-type, td:first-of-type > div {
+  min-width: 200px;
+  height: 100%;
 }
