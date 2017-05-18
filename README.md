@@ -2,6 +2,7 @@
 
 ### Video Search App
 The app integrates with YouTube's Search API and it will display a list of videos based on YT's search results. It allows you to select a video from the list and play in the video detail view. 
+
 **TODO:** 
 - Styling fixes
 
