@@ -1,14 +1,6 @@
-## Yet another react starter kit, but this one works for me.
+## Blogging App
 
-This will be used as my starting point when working on React + Redux projects.
-
-### Things you'll need
-
-- node.js (nvm is highly recommended)
-
-- npm
-
-- yarn
+CRUD App using forms with validation, react router, etc. 
 
 ### You know what to do
 
