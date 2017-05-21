@@ -50,7 +50,7 @@ module.exports = {
     rules
   }, 
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.scss'],
     modules: [path.resolve(__dirname, 'src'), 'node_modules']
   },
   plugins, 
