@@ -6,6 +6,7 @@ export default function(state = {}, action) {
     case FETCH_POSTS:
       //console.log(action.payload.data); // this will spit out an array
       //transform into object
+      return _.mapKeys(action.payload.data, 'id');
     default:
       return state;
 
