@@ -27,7 +27,11 @@ export function getToken () {
 export function fetchPosts() {
 
   const request = axios.get(`${ROOT_URL}`+'/posts', { 
-    headers: { "Authorization" : `Token token=${localStorage.getItem('apiToken')}` }
+    headers: { "Authorization" : `Token token=${localStorage.getItem('apiToken')}` },
+    transformResponse: axios.defaults.transformResponse.concat((data) => {
+      let response = data.data;
+      return response;  
+    })  
   });
 
   return {

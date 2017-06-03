@@ -6,19 +6,18 @@ import { getToken, fetchPosts } from '../actions';
 
 class PostsIndex extends Component {
   componentDidMount() {
+    //TODO: fix authentication 
     //this.props.getToken();
-
-   this.props.fetchPosts();
-    
     //automatically called by react when component gets added to the dom
-    //this.props.fetchPosts();
+    this.props.fetchPosts();
+    
   }
 
   renderPosts() {
-        console.log('render', this.props.posts);
+    console.log('render', this.props.posts);
     return _.map(this.props.posts, post => {
       return (
-        <li className="list-group-item" key={post.id}>{post.title}</li>
+        <li className="list-group-item" key={post.id}>{post.attributes.title}</li>
       );
     });
   }
@@ -29,7 +28,7 @@ class PostsIndex extends Component {
       <div>
         <h3>Posts</h3>
         <ul className="list-group">
-          { this.renderPosts() }
+          { this.renderPosts() }          
         </ul>
       </div>
     );
@@ -40,5 +39,5 @@ function mapStateToProps(state) {
   return { posts: state.posts };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
+export default connect(mapStateToProps, { getToken, fetchPosts })(PostsIndex);
 
