@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getToken, fetchPosts } from '../actions';
 
 
@@ -10,7 +11,7 @@ class PostsIndex extends Component {
     //this.props.getToken();
     //automatically called by react when component gets added to the dom
     this.props.fetchPosts();
-    
+    //
   }
 
   renderPosts() {
@@ -23,7 +24,6 @@ class PostsIndex extends Component {
   }
 
   render() {
-
     return (
       <div>
         <h3>Posts</h3>
