@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const FETCH_POSTS = 'fetch_posts';
 export const GET_TOKEN = 'get_token';
+export const CREATE_POST = 'create_post';
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -40,3 +41,12 @@ export function fetchPosts() {
   }
 }
 
+export function createPost(values, callback) {
+  const request = axios.post(`${ROOT_URL}`+'/posts', values, { 
+    headers: { "Authorization" : `Token token=${localStorage.getItem('apiToken')}` } }).then(()=>callback());
+
+  return {
+    type: CREATE_POST,
+    payload: request
+  }
+}
