@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Field, reduxForm} from 'redux-form';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createPost} from '../actions';
 
 class PostsNew extends Component {
   renderField(field){
+    const { meta: { touched, error } } = field;
+    const formClassName = `form-group ${touched && error ? 'has-danger' : ''}`;
+
     return (
-      <div className="form-group row">
+      <div className={formClassName}>
         <label className="col-2 col-form-label">{field.label}</label>
         <div className="col-10">
           <input 
@@ -13,13 +19,24 @@ class PostsNew extends Component {
             {...field.input}
           />
         </div>
-      </div> 
+        <div className="form-text">
+          {touched ? error : ''}
+        </div>
+      </div>
     );
   }
 
+  onSubmit(values) {
+    this.props.createPost(values, () => {
+      this.props.history.push('/');
+    });
+  }
+
   render() {
+    const { handleSubmit } = this.props;
+  
     return (
-      <form>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
         <Field 
           label="Title"
           name="title"
@@ -28,16 +45,28 @@ class PostsNew extends Component {
         />
         <Field 
           label="Categories"
-          name="categories"
+          name="category"
           type="text"
           component={this.renderField}
         />  
         <Field 
           label="Content"
-          name="content"
+          name="body"
           type="textarea"
           component={this.renderField}
-        />     
+        />  
+        <Field
+          label="User ID"
+          name="user_id"
+          type="text"
+          component={this.renderField}
+        />
+        <button type="submit" className="btn btn-primary">
+          Create Post
+        </button>
+        <Link className="btn btn-danger" to="/">
+          Cancel
+        </Link>
       </form>
     );
   }
@@ -51,11 +80,11 @@ function validate(values) {
     errors.title = "This is a required field";
   }
   if (!values.categories) {
-    errors.title = "This is a required field";
+    errors.categories = "This is a required field";
   }
 
   if (!values.content) {
-    errors.title = "This is a required field";
+    errors.content = "This is a required field";
   }
   
   return errors;
@@ -65,8 +94,6 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'PostsNewForm'
-})(PostsNew);
-
-
-
-
+})(
+  connect(null,{ createPost })(PostsNew)
+);
