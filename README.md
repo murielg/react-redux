@@ -24,6 +24,6 @@ The 5-Day forecast weather app features integration with Google Maps as well as 
 The blog web app integrates with a very basic [API](https://github.com/murielg/rest-api) I created for this purpose. It authenticates users, and accepts standard HTTP CRUD requests. The app has a posts list view and a post detail view. 
 
 **TODO:**
-- [ ] Finish off blog actions: create new post, fetch individual posts, delete, etc.
+- [x] Finish off blog actions: create new post, fetch individual posts, delete, etc.
 - [ ] Polish integration with JSON API, mainly authentication.
 - [ ] Styling
