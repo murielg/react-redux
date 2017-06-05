@@ -59,7 +59,6 @@ export function fetchPost(id) {
     headers: { "Authorization" : `Token token=${localStorage.getItem('apiToken')}` },
     transformResponse: axios.defaults.transformResponse.concat((data) => {
       let response = data.data;
-      console.log(response);
       return response;  
     })  
   });
