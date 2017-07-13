@@ -1,0 +1,19 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+html {
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale!important;  
+}
+h1 {
+  color: #FB5B98;
+  border-bottom: 1px solid blue;
+}
