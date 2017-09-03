@@ -6,11 +6,13 @@ import LocationsMap from "../containers/locations_map";
 export default class App extends Component {
   render() {
     return (
-      <div className="row">
-          <SearchBar/>
-          <LocationsList/>
-          <LocationsMap/>
-      </div>
+        <div className="container-fluid">
+            <div className="row">
+                <SearchBar/>
+                <LocationsList/>
+                <LocationsMap/>
+            </div>
+        </div>
     );
   }
 }
