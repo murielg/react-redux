@@ -35,6 +35,10 @@ class LocationsList extends Component {
         );
     }
 
+    componentDidUpdate(){
+        console.log("componentDidUpdate");
+    }
+
 }
 
 //whatever is returned from this, shows up as props
