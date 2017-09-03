@@ -10,10 +10,16 @@ import reducers from './reducers';
 
 import './scss/style.scss';
 
+const persistedState = {
+  activeLocation: [{
+      "id" : "DFW"
+  }]
+};
+
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={createStoreWithMiddleware(reducers, persistedState)}>
     <App />
   </Provider>
   , document.querySelector('.container'));
