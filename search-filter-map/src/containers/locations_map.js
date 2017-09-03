@@ -3,45 +3,69 @@ import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import { connect } from 'react-redux';
 import { selectLocation} from 'actions';
 import  { bindActionCreators } from 'redux';
-import _ from 'lodash';
+
+const MapTemplate = withGoogleMap(props => (
+    <GoogleMap
+        ref={props.onMapLoad}
+        defaultZoom={6}
+        defaultCenter={{ lat: 32.7767, lng: -96.7970 }}
+    >
+        {
+            props.markers.map(marker => (
+                <Marker
+                    key={marker.id}
+                    position={marker.position}
+                />
+            ))
+        }
+
+    </GoogleMap>
+));
 
 export class LocationsMap extends Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     renderMarkers() {
         return this.props.locations.map((location)=> {
             return (
                 <Marker
                     key={location.id}
-                    position={{lat: location.geometry[0], lng: location.geometry[1]}}
-
+                    position={location.position}
                 />
             );
+
         });
     }
 
+    handleMapLoad(map){
+
+    }
+
+    handleMapClick(event) {
+        console.log(event);
+    }
+
+
     render() {
-
-        let MapTemplate = withGoogleMap(props => (
-            <GoogleMap
-                ref={props.onMapLoad}
-                defaultZoom={6}
-                defaultCenter={{ lat: 32.7767, lng: -96.7970 }}
-            >
-                markers={this.renderMarkers()}
-            </GoogleMap>
-        ));
-
         return (
             <div className="col-sm-3">
-            <MapTemplate
-                containerElement={
-                    <div style={{ height: `100%`, minHeight: `400px` }} />
-                }
-                mapElement={
-                    <div style={{ height: `100%` }} />
-                }
-                onMapLoad={_.noop}
-            />
+                <MapTemplate
+                    containerElement={
+                        <div style={{ height: `100%`, minHeight: `400px` }} />
+                    }
+                    mapElement={
+                        <div style={{ height: `100%` }} />
+                    }
+                    onMapLoad={this.handleMapLoad}
+
+                    mapClick={this.handleMapClick}
+
+                    markers={this.props.locations}
+
+                />
             </div>
         );
     }
