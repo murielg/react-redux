@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-class filter extends Component {
+class Filter extends Component {
     render() {
         return (
-            <div>
-
-            </div>
+            <a className="btn-link">
+                {this.props.name}
+            </a>
         );
     }
 }
 
-export default filter;
+export default Filter;
