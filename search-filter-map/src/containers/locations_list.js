@@ -29,7 +29,7 @@ class LocationsList extends Component {
 
     render() {
         return (
-            <ul className="list-group col-sm-4">
+            <ul className="list-group col-sm-6">
                 {this.renderList()}
             </ul>
         );

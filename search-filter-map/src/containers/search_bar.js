@@ -20,19 +20,21 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onFormSubmit} className="input-group">
-                <input
-                    type="text"
-                    pattern="[0-9]*"
-                    placeholder="ZIP Code"
-                    className="form-control"
-                    value={this.state.term}
-                    onChange={this.onInputChange}
-                />
-                <span className="input-group-btn">
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </span>
-            </form>
+            <div className="col-sm-3">
+                <form onSubmit={this.onFormSubmit} className="input-group">
+                    <input
+                        type="text"
+                        pattern="[0-9]*"
+                        placeholder="ZIP Code"
+                        className="form-control"
+                        value={this.state.term}
+                        onChange={this.onInputChange}
+                    />
+                    <span className="input-group-btn">
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </span>
+                </form>
+            </div>
         );
 
     }
