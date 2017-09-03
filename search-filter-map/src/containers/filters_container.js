@@ -7,6 +7,11 @@ import Filter from "../components/filter";
 
 
 class FiltersContainer extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <div className="col-sm-3">
@@ -34,11 +39,15 @@ class FiltersContainer extends Component {
                 <Filter
                     key={property}
                     name={property}
-                    onClick={() => this.props.setFilter(property)}
+                    onClick={() => this.handleFilterClick(property)}
 
                 />
             )
         })
+    }
+
+    handleFilterClick(property){
+        this.props.setFilters(property);
     }
 
 
@@ -55,10 +64,11 @@ const FilterCategories = [
     }
 
 ];
+//export default FiltersContainer;
 
 function mapStateToProps(state) {
     return {
-        filters: state.filters
+        filters: state.activeFilters
     }
 }
 
