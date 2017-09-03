@@ -3,28 +3,44 @@ import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import { connect } from 'react-redux';
 import { selectLocation} from 'actions';
 import  { bindActionCreators } from 'redux';
-
-
-const SimpleMapExampleGoogleMap = withGoogleMap(props => (
-    <GoogleMap
-        ref={props.onMapLoad}
-        defaultZoom={12}
-        defaultCenter={{ lat: 32.7767, lng: -96.7970 }}
-    />
-));
-
+import _ from 'lodash';
 
 export class LocationsMap extends Component {
+
+    renderMarkers() {
+        return this.props.locations.map((location)=> {
+            return (
+                <Marker
+                    key={location.id}
+                    position={{lat: location.geometry[0], lng: location.geometry[1]}}
+
+                />
+            );
+        });
+    }
+
     render() {
+
+        let MapTemplate = withGoogleMap(props => (
+            <GoogleMap
+                ref={props.onMapLoad}
+                defaultZoom={6}
+                defaultCenter={{ lat: 32.7767, lng: -96.7970 }}
+            >
+                markers={this.renderMarkers()}
+            </GoogleMap>
+        ));
+
         return (
             <div className="col-sm-3">
-            <SimpleMapExampleGoogleMap
+            <MapTemplate
                 containerElement={
                     <div style={{ height: `100%`, minHeight: `400px` }} />
                 }
                 mapElement={
                     <div style={{ height: `100%` }} />
                 }
+                onMapLoad={_.noop}
             />
             </div>
         );
