@@ -15,6 +15,7 @@ const MapTemplate = withGoogleMap(props => (
                 <Marker
                     key={marker.id}
                     position={marker.position}
+                    onClick={() => props.onMarkerClick(marker) }
                 />
             ))
         }
@@ -26,18 +27,8 @@ export class LocationsMap extends Component {
 
     constructor(props) {
         super(props);
-    }
 
-    renderMarkers() {
-        return this.props.locations.map((location)=> {
-            return (
-                <Marker
-                    key={location.id}
-                    position={location.position}
-                />
-            );
-
-        });
+        this.handleMarkerClick = this.handleMarkerClick.bind(this);
     }
 
     handleMapLoad(map){
@@ -46,6 +37,10 @@ export class LocationsMap extends Component {
 
     handleMapClick(event) {
         console.log(event);
+    }
+
+    handleMarkerClick(marker) {
+        this.props.selectLocation(marker);
     }
 
 
@@ -61,9 +56,9 @@ export class LocationsMap extends Component {
                     }
                     onMapLoad={this.handleMapLoad}
 
-                    mapClick={this.handleMapClick}
-
                     markers={this.props.locations}
+
+                    onMarkerClick={this.handleMarkerClick}
 
                 />
             </div>
