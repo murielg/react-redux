@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setFilters } from 'actions';
+import { addFilter, removeFilter } from 'actions';
 import SearchBar from "../components/search_bar";
 import Filter from "../components/filter_link";
 import DropdownFilter from "../components/filter_dropdown";
@@ -34,7 +34,21 @@ class FiltersContainer extends Component {
 
     }
 
-    renderFilters(category){
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.filters !== this.props.filters) {
+            this.setState({ filters : nextProps.filters })
+        }
+    }
+
+    renderActiveFilters(){
+        return this.props.filters.map((filter) => {
+            return (
+                <span>{filter}</span>
+            )
+        })
+    }
+
+    renderFilters(category) {
             switch (category.type) {
                 case 'link':
                     return category.properties.map((property) => {
@@ -43,7 +57,6 @@ class FiltersContainer extends Component {
                                 key={property}
                                 name={property}
                                 onClick={() => this.handleFilterClick(property)}
-
                             />
                         );
                     });
@@ -58,9 +71,8 @@ class FiltersContainer extends Component {
     }
 
     handleFilterClick(property){
-        this.props.setFilters(property);
+        this.props.addFilter(property);
     }
-
 
 }
 
@@ -85,12 +97,12 @@ const FilterCategories = [
 
 function mapStateToProps(state) {
     return {
-        filters: state.activeFilters
+        filters: state.filters
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({setFilters: setFilters}, dispatch);
+    return bindActionCreators({addFilter: addFilter, removeFilter: removeFilter}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiltersContainer);

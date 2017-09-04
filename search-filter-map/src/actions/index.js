@@ -1,6 +1,6 @@
 import {
-    LOCATION_SELECTED,
-    SET_FILTERS
+    LOCATION_SELECTED, REMOVE_FILTER,
+    ADD_FILTER
 } from "./types";
 
 export function selectLocation(location) {
@@ -12,10 +12,17 @@ export function selectLocation(location) {
     }
 }
 
-export function setFilters(filters) {
+export function addFilter(filter) {
     return {
-        type: SET_FILTERS,
-        payload: filters
+        type: ADD_FILTER,
+        payload: filter
     }
 
+}
+
+export function removeFilter(filter) {
+    return {
+        type: REMOVE_FILTER,
+        payload: filter
+    }
 }
