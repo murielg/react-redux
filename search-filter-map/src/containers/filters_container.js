@@ -76,7 +76,7 @@ const FilterCategories = [
         'options' : [
             {'value' : '50', 'label' : '<50'},
             {'value' : '150', 'label' : '<150'},
-            {'value' : '500', 'label' : '150+'},
+            {'value' : '151', 'label' : '>150'},
         ]
     }
 
