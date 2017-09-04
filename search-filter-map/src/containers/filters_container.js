@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setFilters } from 'actions';
 import SearchBar from "../components/search_bar";
-import Filter from "../components/filter";
+import Filter from "../components/filter_link";
+import DropdownFilter from "../components/filter_dropdown";
 
 
 class FiltersContainer extends Component {
@@ -26,24 +27,34 @@ class FiltersContainer extends Component {
             return (
                 <div key={category.title}>
                     <h3>{category.title}</h3>
-                    {this.renderFilters(category.properties)}
+                    {this.renderFilters(category)}
                 </div>
             );
         });
 
     }
 
-    renderFilters(properties){
-        return properties.map((property) => {
-            return (
-                <Filter
-                    key={property}
-                    name={property}
-                    onClick={() => this.handleFilterClick(property)}
+    renderFilters(category){
+            switch (category.type) {
+                case 'link':
+                    return category.properties.map((property) => {
+                        return (
+                            <Filter
+                                key={property}
+                                name={property}
+                                onClick={() => this.handleFilterClick(property)}
 
-                />
-            )
-        })
+                            />
+                        );
+                    });
+                case 'dropdown':
+                    return (
+                        <DropdownFilter options={category.options}/>
+                    );
+                default:
+                    break;
+            }
+
     }
 
     handleFilterClick(property){
@@ -56,11 +67,17 @@ class FiltersContainer extends Component {
 const FilterCategories = [
     {
         'title' : 'Location',
+        'type' : 'link',
         'properties' : ['Dallas', 'Austin', 'Houston']
     },
     {
-        'title' : 'Features',
-        'properties' : ['elevation', 'runway-length']
+        'title' : 'Elevation',
+        'type' : 'dropdown',
+        'options' : [
+            {'value' : '50', 'label' : '<50'},
+            {'value' : '150', 'label' : '<150'},
+            {'value' : '500', 'label' : '150+'},
+        ]
     }
 
 ];
