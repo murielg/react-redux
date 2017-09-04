@@ -5,11 +5,8 @@ import  { bindActionCreators } from 'redux';
 
 class LocationsList extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     renderList() {
+        console.log(this.props)
         return this.props.locations.map((location) => {
             return (
                 <li
@@ -46,7 +43,8 @@ class LocationsList extends Component {
 function mapStateToProps(state) {
     return {
         locations: state.locations,
-        activeLocation: state.activeLocation
+        activeLocation: state.activeLocation,
+        filters : state.filters
     }
 }
 

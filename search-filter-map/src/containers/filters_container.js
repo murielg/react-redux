@@ -9,17 +9,19 @@ import DropdownFilter from "../components/filter_dropdown";
 
 class FiltersContainer extends Component {
 
-    constructor(props) {
-        super(props);
+    componentDidMount() {
+        //console.log(this.props);
+
     }
 
-    render() {
-        return (
-            <div className="col-sm-3">
-                <SearchBar/>
-                {this.renderCategories()}
-            </div>
-        );
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.filters !== this.props.filters) {
+            this.setState({ filters : nextProps.filters })
+        }
+    }
+
+    componentWillMount() {
+
     }
 
     renderCategories() {
@@ -31,21 +33,6 @@ class FiltersContainer extends Component {
                 </div>
             );
         });
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.filters !== this.props.filters) {
-            this.setState({ filters : nextProps.filters })
-        }
-    }
-
-    renderActiveFilters(){
-        return this.props.filters.map((filter) => {
-            return (
-                <span>{filter}</span>
-            )
-        })
     }
 
     renderFilters(category) {
@@ -70,8 +57,28 @@ class FiltersContainer extends Component {
 
     }
 
+    renderActiveFilters(){
+        return this.props.filters.map((filter) => {
+            return (
+                <span>{filter}</span>
+            )
+        })
+    }
+
     handleFilterClick(property){
         this.props.addFilter(property);
+    }
+
+    render() {
+
+        const { filters } = this.props;
+
+        return (
+            <div className="col-sm-3">
+                <SearchBar/>
+                {this.renderCategories()}
+            </div>
+        );
     }
 
 }
