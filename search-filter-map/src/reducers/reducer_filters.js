@@ -1,7 +1,10 @@
+import _ from 'lodash';
+
 import {
     REMOVE_FILTER,
     ADD_FILTER
 } from "../actions/types";
+
 
 //state is not application state, just the state
 //this reducer is responsible for, e.g. creating books
@@ -10,12 +13,10 @@ import {
 export default function(state = [] , action) {
     switch (action.type) {
         case ADD_FILTER:
-            //let newState = _.union([...state], [action.payload]);
-            //return newState;
-            return [...state, action.payload];
+            return _.union([...state], [action.payload]);
 
         case REMOVE_FILTER:
-            return action.payload;
+            return _.omit(state, action.payload);
 
         default:
             return state;
