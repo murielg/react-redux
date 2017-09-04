@@ -7,7 +7,7 @@ import {
 //this reducer is responsible for, e.g. creating books
 //if state is undefined, set to null
 
-export default function(state = {}, action) {
+export default function(state = [] , action) {
     switch (action.type) {
         case ADD_FILTER:
             //let newState = _.union([...state], [action.payload]);
