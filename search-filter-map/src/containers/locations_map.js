@@ -8,8 +8,7 @@ const MapTemplate = withGoogleMap(props => (
     <GoogleMap
         ref={props.onMapLoad}
         defaultZoom={6}
-        defaultCenter={{ lat: 32.7767, lng: -96.7970 }}
-    >
+        defaultCenter={{ lat: 32.7767, lng: -96.7970 }} >
         {
             props.markers.map(marker => (
                 <Marker
@@ -19,7 +18,6 @@ const MapTemplate = withGoogleMap(props => (
                 />
             ))
         }
-
     </GoogleMap>
 ));
 
@@ -31,18 +29,9 @@ export class LocationsMap extends Component {
         this.handleMarkerClick = this.handleMarkerClick.bind(this);
     }
 
-    handleMapLoad(map){
-
-    }
-
-    handleMapClick(event) {
-        console.log(event);
-    }
-
     handleMarkerClick(marker) {
         this.props.selectLocation(marker);
     }
-
 
     render() {
         return (
