@@ -6,7 +6,8 @@ export default function() {
             "position" : {"lat":32.9222,"lng":-97.0409},
             "elevation" : "603",
             "runway-length" : "11388",
-            "city" : "Dallas"
+            "city" : "Dallas",
+            "size" : "large"
         },
         {
             "id" : "DAL",
@@ -14,7 +15,8 @@ export default function() {
             "position" : {"lat":32.8439,"lng":-96.8496},
             "elevation" : "487",
             "runway-length" : "8800",
-            "city" : "Dallas"
+            "city" : "Dallas",
+            "size" : "medium"
         },
         {
             "id" : "AUS",
@@ -22,7 +24,8 @@ export default function() {
             "position" : {"lat":30.2027,"lng":-97.6653},
             "elevation" : "542",
             "runway-length" : "12248",
-            "city" : "Austin"
+            "city" : "Austin",
+            "size" : "medium"
         },
         {
             "id" : "IAH",
@@ -30,7 +33,17 @@ export default function() {
             "position" : {"lat":29.9784,"lng":-95.3424},
             "elevation" : "98",
             "runway-length" : "12001",
-            "city" : "Houston"
+            "city" : "Houston",
+            "size" : "medium"
+        },
+        {
+            "id" : "ADS",
+            "name" : "Addison Airport",
+            "position" : {"lat":32.968611,"lng":-96.836389},
+            "elevation" : "644",
+            "runway-length" : "7202",
+            "city" : "Dallas",
+            "size" : "small"
         }
     ];
 }
