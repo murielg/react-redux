@@ -1193,6 +1193,10 @@ clone-deep@^0.2.4:
     lazy-cache "^1.0.3"
     shallow-clone "^0.1.2"
 
+clone@^0.1.18:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/clone/-/clone-0.1.19.tgz#613fb68639b26a494ac53253e15b1a6bd88ada85"
+
 clone@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.2.tgz#260b7a99ebb1edfe247538175f783243cb19d149"
@@ -1567,7 +1571,7 @@ debug@2.6.0:
   dependencies:
     ms "0.7.2"
 
-debug@2.6.7, debug@^2.1.1, debug@^2.2.0:
+debug@2.6.7, debug@^2.1.0, debug@^2.1.1, debug@^2.2.0:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.7.tgz#92bad1f6d05bbb6bba22cca88bcd0ec894c2861e"
   dependencies:
@@ -2122,6 +2126,14 @@ globule@^1.0.0:
     glob "~7.1.1"
     lodash "~4.16.4"
     minimatch "~3.0.2"
+
+google-distance-matrix@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/google-distance-matrix/-/google-distance-matrix-1.0.0.tgz#1103e7727d3d456f3f76563633eeaacdd3464c92"
+  dependencies:
+    debug "^2.1.0"
+    qs-google-signature "^1.1.1"
+    request "^2.36.0"
 
 google-maps-infobox@^1.1.13:
   version "1.1.15"
@@ -3728,9 +3740,21 @@ q@^1.1.2:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.0.tgz#dd01bac9d06d30e6f219aecb8253ee9ebdc308f1"
 
+qs-google-signature@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/qs-google-signature/-/qs-google-signature-1.2.0.tgz#5de2ce06cbf8b3dca35c962fb20402202cb93400"
+  dependencies:
+    clone "^0.1.18"
+    debug "^2.1.0"
+    qs "^2.3.3"
+
 qs@6.4.0, qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
+
+qs@^2.3.3:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-2.4.2.tgz#f7ce788e5777df0b5010da7f7c4e73ba32470f5a"
 
 query-string@^4.1.0:
   version "4.3.4"
@@ -4025,7 +4049,7 @@ request-promise-native@^1.0.3:
     stealthy-require "^1.1.0"
     tough-cookie ">=2.3.0"
 
-request@2, request@^2.79.0, request@^2.81.0:
+request@2, request@^2.36.0, request@^2.79.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
