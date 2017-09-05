@@ -2,32 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectLocation} from 'actions';
 import  { bindActionCreators } from 'redux';
+import Location from "../components/location";
 
 class LocationsList extends Component {
-
-    renderList() {
-        console.log(this.props);
-        return this.props.locations.map((location) => {
-            return (
-                <li
-                    key={location.id}
-                    className={ "list-group-item " + this.isActive(location.id) }
-                    onClick={() => this.props.selectLocation(location)}
-                >
-                    {location.name}
-                </li>
-            )
-        });
-    }
-
-    isActive(locationId){
-        return (locationId === this.props.activeLocation.id) ? "active" : "";
-    }
 
     render() {
         return (
             <ul className="list-group col-sm-6">
-                {this.renderList()}
+                {this.props.locations.map(location => (
+                    <Location
+                        key={location.id}
+                        onClick = {() => this.props.selectLocation(location)}
+                        active = {location.id === this.props.activeLocation.id}
+                        {...location} />
+                ))}
             </ul>
         );
     }
