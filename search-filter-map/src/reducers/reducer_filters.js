@@ -16,7 +16,7 @@ export default function(state = [] , action) {
             return _.union([...state], [action.payload]);
 
         case REMOVE_FILTER:
-            return _.omit(state, action.payload);
+            return state.filter(item => item !== action.payload);
 
         default:
             return state;
