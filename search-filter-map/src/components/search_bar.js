@@ -26,8 +26,8 @@ class SearchBar extends Component {
       <form onSubmit={this.onFormSubmit} className="input-group">
         <input
           type="text"
-          pattern="[0-9]*"
-          placeholder="ZIP Code"
+          pattern={this.props.pattern}
+          placeholder={this.props.placeholder}
           className="form-control"
           value={this.state.term}
           onChange={this.onInputChange}
