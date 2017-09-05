@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import LocationsList from "../containers/locations_container";
-import SearchBar from "./search_bar";
 import LocationsMap from "../containers/locations_map";
 import FiltersContainer from "../containers/filters_container";
 
