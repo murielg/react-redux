@@ -1,42 +1,41 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class SearchBar extends Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = { term : '' };
+    this.state = {term: ''};
 
-        this.onInputChange = this.onInputChange.bind(this);
-    }
+    this.onInputChange = this.onInputChange.bind(this);
 
-    onInputChange(event){
-        this.setState({ term: event.target.value });
-    }
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
 
-    onFormSubmit (event) {
-        event.preventDefault();
-    }
+  onInputChange(event) {
+    this.setState({term: event.target.value});
+  }
 
-    render() {
-        return (
-            <form onSubmit={this.onFormSubmit} className="input-group">
-                <input
-                    type="text"
-                    pattern="[0-9]*"
-                    placeholder="ZIP Code"
-                    className="form-control"
-                    value={this.state.term}
-                    onChange={this.onInputChange}
-                />
-                <span className="input-group-btn">
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </span>
-            </form>
-        );
+  onFormSubmit(event) {
+    event.preventDefault();
+    console.log("onFormSubmit" + this.state.term);
+  }
 
-    }
+  render() {
+    return (
+      <form onSubmit={this.onFormSubmit} className="input-group">
+        <input
+          type="text"
+          pattern="[0-9]*"
+          placeholder="ZIP Code"
+          className="form-control"
+          value={this.state.term}
+          onChange={this.onInputChange}
+        />
+      </form>
+    );
+
+  }
 }
 
 export default SearchBar;
-
