@@ -14,11 +14,13 @@ class SearchBar extends Component {
 
   onInputChange(event) {
     this.setState({term: event.target.value});
+
+    this.props.onChange(event.target.value);
+
   }
 
   onFormSubmit(event) {
-    event.preventDefault();
-    console.log("onFormSubmit" + this.state.term);
+    this.props.onFormSubmit(event);
   }
 
   render() {
@@ -26,10 +28,10 @@ class SearchBar extends Component {
       <form onSubmit={this.onFormSubmit} className="input-group">
         <input
           type="text"
+          className="form-control"
           pattern={this.props.pattern}
           placeholder={this.props.placeholder}
-          className="form-control"
-          value={this.state.term}
+          value={this.props.term}
           onChange={this.onInputChange}
         />
       </form>
