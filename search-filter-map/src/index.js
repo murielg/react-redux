@@ -11,19 +11,12 @@ import reducers from './reducers';
 
 import './scss/style.scss';
 
-const persistedState = {
-  activeLocation: [{
-      "id" : "DFW"
-  }]
-};
-
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
 ReactDOM.render(
   <Provider store={
       createStoreWithMiddleware(
           reducers,
-          persistedState,
           window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
       )
   }>
