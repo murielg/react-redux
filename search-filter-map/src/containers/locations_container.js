@@ -21,7 +21,7 @@ class LocationsList extends Component {
     }
 
     componentDidUpdate(){
-        //console.log("componentDidUpdate");
+        console.log("componentDidUpdate");
     }
 
 }

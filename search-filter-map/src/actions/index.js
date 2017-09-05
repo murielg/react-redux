@@ -1,5 +1,6 @@
 import {
-    LOCATION_SELECTED, REMOVE_FILTER,
+    LOCATION_SELECTED,
+    REMOVE_FILTER,
     ADD_FILTER
 } from "./types";
 

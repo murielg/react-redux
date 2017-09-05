@@ -10,14 +10,11 @@ import DropdownFilter from "../components/filter_dropdown";
 class FiltersContainer extends Component {
 
     componentDidMount() {
-        //console.log(this.props);
 
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.filters !== this.props.filters) {
-            this.setState({ filters : nextProps.filters })
-        }
+
     }
 
     componentWillMount() {
@@ -58,11 +55,18 @@ class FiltersContainer extends Component {
     }
 
     renderActiveFilters(){
-        return this.props.filters.map((filter) => {
-            return (
-                <span>{filter}</span>
-            )
-        })
+        if (this.props) {
+            return this.props.filters.map((filter) => {
+                return (
+                    <div
+                        key={filter}
+                        onClick={() => this.props.removeFilter(filter)}
+                    >
+                        {filter}
+                    </div>
+                )
+            })
+        }
     }
 
     handleFilterClick(property){
@@ -71,11 +75,10 @@ class FiltersContainer extends Component {
 
     render() {
 
-        const { filters } = this.props;
-
         return (
             <div className="col-sm-3">
                 <SearchBar/>
+                {this.renderActiveFilters()}
                 {this.renderCategories()}
             </div>
         );
@@ -85,12 +88,12 @@ class FiltersContainer extends Component {
 
 const FilterCategories = [
     {
-        'title' : 'Location',
+        'title' : 'city',
         'type' : 'link',
         'properties' : ['Dallas', 'Austin', 'Houston']
     },
     {
-        'title' : 'Elevation',
+        'title' : 'elevation',
         'type' : 'dropdown',
         'options' : [
             {'value' : '50', 'label' : '<50'},

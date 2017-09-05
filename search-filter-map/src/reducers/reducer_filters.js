@@ -14,10 +14,6 @@ export default function(state = [] , action) {
     switch (action.type) {
         case ADD_FILTER:
             return _.union([...state], [action.payload]);
-            // return state.locations.map(location =>
-            //         (location.id === action.id) ? { ...location, active: !location.active} : location
-            //
-            // );
 
         case REMOVE_FILTER:
             return _.omit(state, action.payload);
