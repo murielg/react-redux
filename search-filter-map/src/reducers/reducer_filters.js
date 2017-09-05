@@ -13,7 +13,7 @@ import {
 export default function(state = [] , action) {
     switch (action.type) {
         case ADD_FILTER:
-            return _.union([...state], [action.payload]);
+            return _.union([action.payload], [...state]);
 
         case REMOVE_FILTER:
             return state.filter(item => item !== action.payload);
