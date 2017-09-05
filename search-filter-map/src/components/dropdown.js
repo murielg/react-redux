@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 
-class DropdownFilter extends Component {
+class Dropdown extends Component {
     render() {
         return (
             <select onClick={this.props.onClick}>
@@ -14,7 +13,6 @@ class DropdownFilter extends Component {
         );
     }
 
-
 }
 
-export default DropdownFilter;
+export default Dropdown;

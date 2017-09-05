@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-class Filter extends Component {
+class Link extends Component {
     render() {
         return (
-            <a className="btn-link" onClick={this.props.onClick}>
+            <a className={this.props.className} onClick={this.props.onClick}>
                 {this.props.name}
             </a>
         );
     }
 }
 
-export default Filter;
+export default Link;
