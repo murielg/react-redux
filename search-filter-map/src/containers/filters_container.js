@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addFilter, removeFilter} from 'actions';
-import SearchBar from "../components/search_bar";
-import Filter from "../components/filter_link";
-import DropdownFilter from "../components/filter_dropdown";
+import Link from "../components/link";
+import GeoLocation from "../components/geolocation";
 
 
 class FiltersContainer extends Component {
@@ -19,7 +18,7 @@ class FiltersContainer extends Component {
   render() {
     return (
       <div className="col-sm-3">
-        <SearchBar/>
+        <GeoLocation />
         {this.renderCurrentFilters()}
         {this.renderFilterGroups()}
       </div>
@@ -41,44 +40,32 @@ class FiltersContainer extends Component {
   }
 
   renderFilterGroups() {
-    return FilterGroups.map((category) => {
+    return FilterGroups.map((group) => {
       return (
-        <div key={category.title}>
-          <h3>{category.title}</h3>
-          {this.renderFilter(category)}
+        <div key={group.type}>
+          <h4>{group.type}</h4>
+          {this.renderFilter(group)}
         </div>
       );
     });
   }
 
-  renderFilter(filterGroup) {
-    switch (filterGroup.type) {
-      case 'link':
-        return filterGroup.properties.map((property) => {
-          return (
-            <Filter
-              key={property}
-              name={property}
-              onClick={() => this.handleFilterClick('add', filterGroup.title, property)}
-            />
-          );
-        });
-      case 'dropdown':
+  renderFilter(group) {
+      return group.properties.map((property) => {
         return (
-          <DropdownFilter options={filterGroup.options}/>
+          <Link
+            key={property}
+            name={property}
+            className="btn-link"
+            onClick={() => this.handleFilterClick('add', property)}
+          />
         );
-      default:
-        break;
-    }
-
+      });
   }
 
-
-  handleFilterClick(action, title, property) {
-    let filter = {title, property};
+  handleFilterClick(action, property) {
     switch (action) {
       case 'add' :
-        console.log(filter);
         this.props.addFilter(property);
         return;
       case 'remove' :
@@ -87,31 +74,21 @@ class FiltersContainer extends Component {
       default:
         return;
     }
-
   }
-
-
 }
 
 const FilterGroups = [
   {
-    'title': 'city',
-    'type': 'link',
+    'type': 'city',
     'properties': ['Dallas', 'Austin', 'Houston']
   },
   {
-    'title': 'size',
-    'type': 'link',
+    'type': 'size',
     'properties': ['small', 'medium', 'large']
   },
   {
-    'title': 'elevation',
-    'type': 'dropdown',
-    'options': [
-      {'value': '50', 'label': '<50'},
-      {'value': '150', 'label': '<150'},
-      {'value': '151', 'label': '>150'},
-    ]
+    'type': 'elevation',
+    'properties' : ['low', 'high']
   }
 
 ];
