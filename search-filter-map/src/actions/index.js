@@ -2,12 +2,14 @@ import {
   LOCATION_SELECTED,
   REMOVE_FILTER,
   ADD_FILTER,
-  GET_GEOLOCATION
+  GET_GEOLOCATION,
+  UPDATE_LOCATIONS
 } from "./types";
+//Action Creators will return an action:
+// an object with a type property
+// and a payload or value
 
 export function selectLocation(location) {
-  // selectLocation is an ActionCreator
-  // will return an action, ie an object with a type property
   return {
     type: LOCATION_SELECTED,
     payload: location
@@ -33,5 +35,12 @@ export function getGeolocation(location) {
   return {
     type: GET_GEOLOCATION,
     payload: location
+  }
+}
+
+export function updateDistance(distance) {
+  return {
+    type: UPDATE_LOCATIONS,
+    payload: distance
   }
 }
