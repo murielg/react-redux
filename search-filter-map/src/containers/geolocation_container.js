@@ -7,15 +7,19 @@ import SearchBar from "../components/search_bar";
 import Button from "../components/button";
 import Dropdown from "../components/dropdown";
 
-
 class GeolocationContainer extends Component {
 
   constructor(props) {
     super(props);
     this.getGeolocation = this.getGeolocation.bind(this);
+    this.renderLocationBtnText = this.renderLocationBtnText.bind(this);
 
     this.state = {
-      zipcode: ''
+      zipcode: '',
+      detectButtonText: 'Detect My Location',
+      loading: false,
+      success: false,
+      errorMessage: ''
     }
   }
 
@@ -26,9 +30,14 @@ class GeolocationContainer extends Component {
   getGeolocation() {
     const geolocation = navigator.geolocation;
 
+    const self = this;
+
+    self.setState({loading: true});
+
     const location = new Promise((resolve, reject) => {
       if (!geolocation) {
-        reject(new Error('Not Supported'));
+        //reject(new Error('Not Supported'));
+        self.setErrorMessage("Not Supported");
       }
 
       geolocation.getCurrentPosition((position) => {
@@ -36,7 +45,8 @@ class GeolocationContainer extends Component {
         this.reverseGeocoding(position);
 
       }, () => {
-        reject(new Error('Permission denied'));
+        //reject(new Error('Permission denied'));
+        self.setErrorMessage("Permission denied")
       });
     });
 
@@ -51,20 +61,32 @@ class GeolocationContainer extends Component {
     const geocoder = new google.maps.Geocoder;
     let latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
     const self = this;
-    var zipcode = '';
 
     geocoder.geocode({'location': latlng}, function (results, status) {
       if (status === 'OK') {
         if (results[0]) {
-          zipcode = results[0].address_components[6].short_name;
-          self.setState({zipcode: zipcode});
+          self.setState(
+            {
+              zipcode: results[0].address_components[6].short_name,
+              loading: false,
+              success: true
+            }
+          );
+          self.beforeGetDistances();
         } else {
-          console.log("no results")
+          self.setErrorMessage("No Results");
         }
       } else {
-        console.log('Geocoder failed due to: ' + status);
+        self.setErrorMessage("Geocoder failed due to: " + status);
       }
     });
+  }
+
+  setErrorMessage(msg) {
+    this.setState({
+      success: false,
+      errorMessage: msg
+    })
   }
 
   onInputChange(value) {
@@ -73,15 +95,14 @@ class GeolocationContainer extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
+    this.beforeGetDistances();
+  }
+
+  beforeGetDistances(){
     if (this.state.zipcode !== '') {
-
       this.props.locations.map(location => {
-
-        let destination = new google.maps.LatLng(location.lat, location.lng);
-
         this.getDistances(this.state.zipcode, location.position);
       });
-
     }
   }
 
@@ -119,10 +140,21 @@ class GeolocationContainer extends Component {
     }
   }
 
+  renderLocationBtnText() {
+    if (this.state.loading) {
+      return "Detecting your Location..."
+    } else if (this.state.success) {
+      return "Using your location"
+    } else {
+      return "Detect Your Location"
+    }
+  }
+
   render() {
     return (
       <div>
-        <Button onClick={this.getGeolocation} title="Detect My Location"/>
+        <Button onClick={this.getGeolocation} title={this.renderLocationBtnText()}/>
+        <div className="alert-danger alert-dismissible">{this.state.errorMessage}</div>
         <SearchBar
           pattern="(\d{5}([\-]\d{4})?)"
           placeholder="ZIP Code"

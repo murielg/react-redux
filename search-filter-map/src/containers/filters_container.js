@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addFilter, removeFilter} from 'actions';
 import Link from "../components/link";
-import GeoLocation from "../components/geolocation";
+import GeoLocation from "./geolocation_container";
 
 
 class FiltersContainer extends Component {
@@ -17,8 +17,7 @@ class FiltersContainer extends Component {
 
   render() {
     return (
-      <div className="col-sm-3">
-        <GeoLocation />
+        <div>
         {this.renderCurrentFilters()}
         {this.renderFilterGroups()}
       </div>
