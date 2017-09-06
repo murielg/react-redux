@@ -61,13 +61,24 @@ class GeolocationContainer extends Component {
     const geocoder = new google.maps.Geocoder;
     let latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
     const self = this;
+    var zip;
 
     geocoder.geocode({'location': latlng}, function (results, status) {
       if (status === 'OK') {
         if (results[0]) {
+          for(var i = 0; i < results.length; i++) {
+            for(var j=0;j < results[i].address_components.length; j++){
+              for(var k=0; k < results[i].address_components[j].types.length; k++){
+                if(results[i].address_components[j].types[k] == "postal_code"){
+                    zip = results[i].address_components[j].short_name;
+                }
+              }
+            }
+          }
+
           self.setState(
             {
-              zipcode: results[0].address_components[6].short_name,
+              zipcode: zip,
               loading: false,
               success: true
             }
