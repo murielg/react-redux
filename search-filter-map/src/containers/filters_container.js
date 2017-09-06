@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {addFilter, removeFilter} from 'actions';
+import {addFilter, removeFilter} from '../actions';
 import Link from "../components/link";
 import GeoLocation from "./geolocation_container";
 

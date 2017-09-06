@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import { connect } from 'react-redux';
-import { selectLocation} from 'actions';
+import { selectLocation} from '../actions';
 import  { bindActionCreators } from 'redux';
 
 const MapTemplate = withGoogleMap(props => (

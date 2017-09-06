@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectLocation} from 'actions';
+import { selectLocation} from '../actions';
 import  { bindActionCreators } from 'redux';
 import Location from "../components/location_detail";
 
