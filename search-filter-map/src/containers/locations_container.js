@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { selectLocation} from '../actions';
 import  { bindActionCreators } from 'redux';
 import Location from "../components/location_detail";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class LocationsList extends Component {
 
